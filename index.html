@@ -1,0 +1,550 @@
+<!doctype html>  
+<html lang="en">
+	
+	<head>
+		<meta charset="utf-8">
+		
+		<title>reveal.js - The HTML Presentation Framework</title>
+
+		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+		<meta name="author" content="Hakim El Hattab">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+		
+		<link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+		
+		<link rel="stylesheet" href="css/main.css">
+		<link rel="stylesheet" href="css/theme/default.css">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<script>
+			// If the query includes 'print-pdf' we'll use the PDF print sheet
+			document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+	
+	<body>
+		
+		<div class="reveal">
+
+			<!-- Used to fade in a background when a specific slide state is reached -->
+			<div class="state-background"></div>
+			
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h1>Introduction to PHP</h1>
+					<h3>9/27/2012</h3>
+					<h4 style="text-transform: none;">Slides available on sdphp.kindari.net</h4>
+				</section>
+				<section>
+					<h2>About me</h2>
+					<h3>William Cahill-Manley</h3>
+					<ul>
+						<li>Application Developer for Submodal</li>
+						<li>@williammanley</li>
+						<li>http://kindari.me</li>
+						<li>github.com/Kindari</li>
+						<li>Skype: iradnik</li>
+						<li>william@cahillmanley.com</l1>
+					</ul>
+				</section>
+				<section>
+					<section>
+						<h3>Open &amp; Closing tags</h3>
+						<pre><code>&lt;title&gt;&lt;?php echo "Hello world!"; ?&gt;&lt;/title&gt;</code></pre>
+						<pre><code>&lt;?php
+
+class Foo
+{
+
+}</code></pre>
+					</section>
+					<section>
+						<h3>Variables</h3>
+						<pre><code>$title = 'Hello, world!';</code></pre>
+						<pre><code>&lt;title&gt;&lt;?php echo $title; ?&gt;&lt;/title&gt;</code></pre>
+						<pre>&lt;title&gt;Hello, world!&lt;/title&gt;</pre>
+						<p>A Variable, as the name suggests, can have its value change during the execution of a script.</p>
+					</section>
+					<section>
+						<h3>Constants</h3>
+						<pre><code>define('VERSION', '1.2.3');</code></pre>
+						<pre><code>echo "Version: " . VERSION;</code></pre>
+						<pre>Version: 1.2.3</pre>
+						<p>A constant, once defined, cannot be changed or unset. Traditionally constants are uppercase.</p>
+					</section>
+					<section>
+						<h3>Including other scripts</h3>
+						<pre><code>// foobar.php
+$name = 'William';</code></pre>
+						<pre><code>// baz.php
+include 'foobar.php';
+echo $name;</code></pre>
+<pre>William</pre>
+<pre><code>require 'test.php';</code></pre>
+<pre>Warning: require(test.php): failed to open stream: No such file or directory on line 1
+
+Fatal error: require(): Failed opening required 'test.php' (include_path='.:/usr/lib/php') on line 1</pre>
+					</section>
+					<section>
+						<h3>Include file.. once</h3>
+<pre><code>// test.php
+echo "Test\n";</code></pre>
+<pre><code> // test2.php
+include_once 'test.php';
+require_once 'test.php';
+include_once 'test.php';
+require_once 'test.php';</code></pre>
+<pre>Test</pre>
+<pre><code> // test3.php
+include 'test.php';
+require 'test.php';
+include 'test.php';
+require 'test.php';</code></pre>
+<pre>Test
+Test
+Test
+Test</pre>
+
+
+<p>Useful for class and function loading</p>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h2>Types in PHP</h2>
+						<ul>
+							<li>Strings</li>
+							<li>Integers</li>
+							<li>Floats</li>
+							<li>Arrays</li>
+							<li>and many more...</li>
+						</ul>
+					</section>
+					<section>
+						<h3>Strings</h3>
+						<pre><code>$foo = &#39;bar&#39;;</code></pre>
+						<pre><code>$bar = &quot;baz&quot;;</code></pre>
+						<p class="fragment">Whats the difference?</p>
+						<pre class="fragment"><code>$foo = &#39;ba\tr&#39;; # equal to 'ba\tr'</code></pre>
+						<pre class="fragment"><code>$bar = &quot;ba\tz&quot;; # equal to 'ba    z'</code></pre>
+					</section>
+					<section>
+						<h3>Integers</h3>
+						<pre><code>$a = 1234; // decimal number</code></pre>
+						<pre><code>$b = -123; // a negative number</code></pre>
+						<pre class="fragment"><code>$c = 0123; // octal number (equivalent to 83 decimal)</code></pre>
+						<pre class="fragment"><code>$d = 0x1A; // hexadecimal number (equivalent to 26 decimal)</code></pre>
+					</section>
+					<section>
+						<h3>Arrays</h3>
+						<pre><code>$people = array('Eric', 'John', 'William');</code></pre>
+						<pre class="fragment"><code>echo $people[1];</code></pre>
+						<pre class="fragment">John</pre>
+						<div class="fragment">
+							<p>Arrays are zero-based.</p>
+							<pre><code>echo $people[0];</code></pre>
+							<pre>Eric</pre>
+						</div>
+						<div class="fragment">
+							<p>Arrays can be of mixed types</p>
+							<pre><code>$numbers = array(4, 'Eight', 15, 16, 'Twenty Three', array(42));</code></pre>
+						</div>
+					</section>
+					<section>
+						<h3>Associative Arrays</h3>
+						<p>Key => Value pairs of data</p>
+						<pre><code>$person = array(
+	'firstname' => 'William',
+	'lastname'  => 'Cahill-Manley',
+);</code></pre>
+						<pre class="fragment"><code>echo $person['firstname'];</code></pre>
+						<pre class="fragment">William</pre>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h3>Flow Control</h3>
+						<pre><code>if ($_GET['number'] > 5)
+{
+	echo "Hooray!";
+}
+elseif ( $_GET['number'] == 5)
+{
+	echo "Indifferent";
+}
+else
+{
+	echo "Boo :/";
+}</pre></code>
+						<h4><A href="example_1.php?number=10">Example</a></h4>
+					</section>
+					<section>
+						<h3>For Loops</h3>
+						<pre><code>for( expr1; expr2; expr3 ) {}</code></pre>
+						<pre class="fragment"><code>for( $i = 0; $i < 10; $i++)
+{
+	echo "{$i}\n";
+}</code></pre>
+<pre class="fragment">
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9</pre>
+					</section>
+					<section>
+						<h3>Foreach loops</h3>
+						<pre><code>$people = array(
+	'Eric' => 'Blue',
+	'John' => 'Pink',
+	'William' => 'Green'
+);</code></pre>
+						<pre class="fragment"><code>foreach($people as $person => $color)
+{
+	echo "{$person}'s favorite color is {$color}\n";
+}</code></pre> 
+<pre class="fragment">Eric's favorite color is Blue
+John's favorite color is Pink
+William's favorite color is Green</pre>
+					</section>
+					<section>
+						<h3>Foreach loops</h3>
+						<pre><code>$people = array(
+	'Eric' => 'Blue',
+	'John' => 'Pink',
+	'William' => 'Green'
+);</code></pre>
+						<pre class="fragment"><code>foreach($people as $color)
+{
+	echo "{$color}\n";
+}</code></pre> 
+<pre class="fragment">Blue
+Pink
+Green</pre>
+					</section>
+					<section>
+						<h3>Foreach loops</h3>
+						<pre><code>$people = array( 'Eric', 'John', 'William' );</code></pre>
+						<pre class="fragment"><code>foreach($people as $key =>$person)
+{
+	echo "Hello {$person}! {$key}\n";
+}</code></pre> 
+<pre class="fragment">
+Hello Eric! 0
+Hello John! 1
+Hello William! 2
+</pre>
+					</section>
+					<section>
+						<h3>While loops</h3>
+						<pre><code>$i = 0;
+while ( $i < 10 )
+{
+	echo "{$i}\n";
+	$i++;
+}</code></pre>
+<pre>0
+1
+2
+3
+4
+5
+6
+7
+8
+9</pre>
+					</section>
+					<section>
+						<h3>Do While</h3>
+						<pre><code>$something = False;
+
+while($something) echo "while wont execute\n";
+
+do
+  echo "do while will always execute once\n";
+while ($something);</code></pre>
+<pre>do while will always execute once</pre>
+					</section>
+					<section>
+						<h3>Switch Cases</h3>
+						<pre><code>$person = $_GET['person'];
+switch($person)
+{
+	case 'John':
+		echo 'Hey John!';
+	case 'Eric':
+		echo 'Hey Eric!';
+		break;
+	case 'William':
+		echo 'I for one welcome our new overlord';
+		break;
+	default:
+		echo "Hello, {$person}!";
+}</code></pre>
+<a href="example_2.php?person=William">Example</a>
+					</section>
+					<section>
+						<h3>continue and break</h3>
+						<pre><code>
+foreach( array(1,2,3,4,5) as $num)
+{
+	if ($num==2) continue;
+	if ($num==5) break;
+	echo "{$num}\n";
+}</code></pre>
+<pre class="fragment">1
+3
+4</pre>
+						<ul>
+							<li class="fragment">for</li>
+							<li class="fragment">foreach</li>
+							<li class="fragment">while</li>
+							<li class="fragment">do ... while</li>
+							<li class="fragment">switch</li>
+						</ul>
+					</section>
+
+				</section>
+
+				<section>
+					<section>
+						<h3>Alternate Syntaxes</h3>
+						<pre><code>&lt;?="test"?&gt;</code></pre>
+						<pre><code>&lt;?php echo "test"; ?&gt;</code></pre>
+						<pre>test</pre>
+					</section>
+					<section>
+						<h3>Alternate Syntax: if</h3>
+<pre><code>if ($something):
+	echo "Something";
+endif;</code></pre>
+					</section>
+					<section>
+						<h3>Alternate Syntax: for</h3>
+<pre><code>for ($i = 0; $i < 5; $i++):
+	echo "Something";
+endfor;</code></pre>
+					</section>
+					<section>
+						<h3>Alternate Syntax: foreach</h3>
+<pre><code>foreach ($foo as $bar):
+	echo "Baz";
+endforeach;</code></pre>
+					</section>
+					<section>
+						<h3>Alternate Syntax: while</h3>
+<pre><code>while ($something):
+	echo "Something";
+endwhile;</code></pre>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h3>Functions</h3>
+						<pre><code>function add( $a, $b ) {
+	$sum = $a + $b;
+	return "{$a} + {$b} = {$sum}";
+	echo "Hello, world!";
+}
+
+echo add(4, 7);</code></pre>
+<pre>4 + 7 = 11</pre>
+
+					</section>
+					<section>
+						<h3>Classes</h3>
+<pre><code>class Person {
+	private $firstname = '';
+	private $lastname = '';
+
+	public function __construct( $firstname, $lastname ) {
+		$this->firstname = $firstname;
+		$this->lastname = $lastname;
+	}
+
+	public function fullname() {
+		return "{$this->firstname} {$this->lastname}";
+	}
+}
+
+$william = new Person('William', 'Cahill-Manley');
+
+echo $william->fullname();</code></pre>
+<pre>William Cahill-Manley</pre>
+					</section>
+					<section>
+						<h3>Magic: Get</h3>
+<pre><code>class Foo {
+	public $bar = 'baz';
+
+	public function __get($key) {
+		return "No {$key} here ;(\n";
+	}
+}
+$foo = new Foo();
+echo $foo->baz;
+echo $foo->bar;</code></pre>
+<pre>No baz here ;(
+baz</pre>
+					</section>
+					<section>
+						<h3>Magic: Set</h3>
+<pre><code>class Foo {
+	public $data = array();
+
+	public function __set($key, $value) {
+		$this->data[$key] = $value;
+		echo "Added key '{$key}' with value '{$value}'\n";
+	}
+}
+$foo = new Foo();
+$foo->name = 'William';
+$foo->bar = 'baz';
+</code></pre>
+<pre>Added key 'name' with value 'William'
+Added key 'bar' with value 'baz'</pre>
+					</section>
+					<section>
+						<h3>Static</h3>
+<pre><code>class Person {
+	public static $instances = array();
+
+	public function __construct( $name ) {
+		static::$instances[] = $this;
+		$this->name = $name;
+	}
+	public static function all() {
+		$output = array();
+		foreach(static::$instances as $person) {
+			$output[] = $person->name;
+		}
+		return $output;
+	}
+}
+
+$william = new Person('William');
+$john = new Person('John');
+$eric = new Person('Eric');
+
+var_dump( Person::all() );
+
+</code></pre>
+<pre>array(3) {
+	[0]=> string(7) "William"
+	[1]=> string(4) "John"
+	[2]=> string(4) "Eric"
+}</pre>
+					</section>
+					<section>
+						<h3>Class Constants</h3>
+<pre><code>class Api {
+	const SOME_ENDPOINT = 'http://cahillmanley.com/ip.json';
+}
+echo Api::SOME_ENDPOINT;</code></pre>
+<pre>http://cahillmanley.com/ip.json</pre>
+					</section>
+					<section>
+						<h3>Class Visibility</h3>
+						<pre><code>
+class P {
+	private $private = 'Foo\n';
+	protected $protected = 'Bar\n';
+	public $public = 'Baz\n';
+	
+	public function __construct() {
+		echo $this->private;
+	}
+}
+class C extends P{
+	public function __construct() {
+		echo $this->protected;
+	}
+}
+$p = new P();
+$c = new C();
+echo $p->public;</code></pre>
+<pre>Foo
+Bar
+Baz</pre>
+					</section>
+					<section>
+						<h3>Method Overloading</h3>
+<pre><code>
+class Something {
+	public function __call($name,$arguments) {
+		$args = implode(',', $arguments);
+		return "Something->{$name}({$args})\n";
+	}
+	public static function __callStatic($name,$arguments) {
+		$args = implode(',', $arguments);
+		return "Something::{$name}({$args})\n";
+	}
+}
+
+$s = new Something();
+echo $s->test(1,2,3);
+echo $s::test(4,5,6);</code></pre>
+<pre>Something->test(1,2,3)
+Something::test(4,5,6)</pre>
+					</section>
+				</section>
+
+
+			</div>
+
+			<!-- The navigational controls UI -->
+			<aside class="controls">
+				<a class="left" href="#">&#x25C4;</a>
+				<a class="right" href="#">&#x25BA;</a>
+				<a class="up" href="#">&#x25B2;</a>
+				<a class="down" href="#">&#x25BC;</a>
+			</aside>
+
+			<!-- Presentation progress bar -->
+			<div class="progress"><span></span></div>
+			
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+			
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/linear(2d)
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/highlight.js', async: true, callback: function() { window.hljs.initHighlightingOnLoad(); } },
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'lib/js/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'lib/js/data-markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'socket.io/socket.io.js', async: true, condition: function() { return window.location.host === 'localhost:1947'; } },
+					{ src: 'plugin/speakernotes/client.js', async: true, condition: function() { return window.location.host === 'localhost:1947'; } },
+				]
+			});
+			
+		</script>
+
+	</body>
+</html>
