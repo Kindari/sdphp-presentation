@@ -402,6 +402,24 @@ echo $foo->bar;</code></pre>
 baz</pre>
 					</section>
 					<section>
+						<h3>Magic: Get</h3>
+<pre><code>class Foo {
+	public $bar = 'baz';
+
+	protected function __get($key) {
+		return "No {$key} here ;(\n";
+	}
+}
+$foo = new Foo();
+echo $foo->baz;
+echo $foo->bar;</code></pre>
+<pre>
+Warning: The magic method __get() must have public visibility and cannot be static
+No baz here ;(
+Warning: The magic method __get() must have public visibility and cannot be static
+baz</pre>
+					</section>
+					<section>
 						<h3>Magic: Set</h3>
 <pre><code>class Foo {
 	public $data = array();
