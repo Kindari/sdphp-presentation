@@ -520,6 +520,96 @@ echo $s::test(4,5,6);</code></pre>
 Something::test(4,5,6)</pre>
 					</section>
 				</section>
+				<section>
+					<h3>Database Access</h3>
+					<a href="http://net.tutsplus.com/tutorials/php/why-you-should-be-using-phps-pdo-for-database-access/">Why you should be using PDO</a>
+					<ul>
+						<li>Cross Database Driver support</li>
+						<li>Prepared Statements</li>
+						<li>Proper bindings</li>
+						<li>and lots lots more</li>
+					</ul>
+				</section>
+				<section>
+					<section>
+						<h3>Models, Views, Controllers</h3>
+						<ul>
+							<li>Code Seperation</li>
+							<li>Reusability</li>
+							<li>Ease Refactoring</li>
+						</ul>
+					</section>
+					<section>
+						<h3>Models</h3>
+<pre><code>class People {
+	public static function all() {
+		return array( 'William', 'John', Eric' );
+	}
+}</code></pre>
+<ul><li class="fragment">a model represents your data</li>
+	<li class="fragment">Logical container for<ul>
+		<li class="fragment">Datacase calls</li>
+		<li class="fragment">API Access</li>
+	</ul></li>
+	<li class="fragment">Models usually represent<ul>
+		<li class="fragment">Tables in a database</li>
+		<li class="fragment">a file or collection of files on a hard drive</li>
+		<li class="fragment">Documents stored in Mongo</li>
+		<li class="fragment">Any other data containers you need to define</li>
+	</ul></li>
+</ul>				</section>
+					<section>
+						<h3>Views</h3>
+<pre><code>&lt;h1&gt;People&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;?php foreach($people as $person): ?&gt;
+	&lt;li&gt;&lt;?=$person?&gt;&lt;/li&gt;
+&lt;?php endforeach; ?&gt;
+&lt;/ul&gt;</code></pre>
+					</section>
+					<section>
+						<h3>View.. Models?</h3>
+<pre><code>class View {
+
+	private $data = array();
+	public $path = '';
+
+	public function __construct($path) {
+		$this->path = $path;
+	}
+	public function render() {
+		extract($this->data);
+		ob_start();
+		require $this->path;
+		return ob_get_clean();
+	}
+	public function __set($key, $value) {
+		$this->data[ $key ] = $value;
+	}
+}</code></pre>
+					</section>
+					<section>
+						<h3>Controllers</h3>
+<pre><code>class People_Controller {
+	public function index() {
+		$view = new View('people.php');
+		$view->people = People::all();
+		return $view->render();
+	}
+}
+
+$controller = new People_Controller();
+echo $controller->index();</code></pre>
+<pre>&lt;h1&gt;People&lt;/h1&gt;
+
+&lt;ul&gt;
+	&lt;li&gt;William&lt;/li&gt;
+	&lt;li&gt;John&lt;/li&gt;
+	&lt;li&gt;Eric&lt;/li&gt;
+&lt;/ul&gt;</pre>
+					</section>
+				</section>
 
 
 			</div>
